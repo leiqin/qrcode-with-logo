@@ -24,3 +24,9 @@ qrcode-with-logo
 	BufferedImage img = qh.qrcodeImg();
 
 	ImageIO.write(img, "png", new File(output));
+
+下图使用这个命令生成的：
+	
+	java -cp bin:lib/core-3.0.0.jar:lib/javase-3.0.0.jar name.leiqin.qrcode.Test qrcode.png http://blog.leiqin.name/static/images/galaxy-ngc3370.jpg  https://github.com/leiqin/qrcode-with-logo
+
+<img src="http://blog.leiqin.name/qrcode-with-logo/images/qrcode.png"/>
