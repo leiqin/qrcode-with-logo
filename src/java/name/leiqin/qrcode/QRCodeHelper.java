@@ -18,7 +18,7 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
-public class QrCodeHelper {
+public class QRCodeHelper {
 
 	public static double DEFAULT_QRCODE_OVER_WHOLE = 1.0 / 1.162;
 	public static double DEFAULT_LOGO_OVER_WHOLE = 1.0 / 5;

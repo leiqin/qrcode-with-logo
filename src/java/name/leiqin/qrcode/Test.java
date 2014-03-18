@@ -35,7 +35,7 @@ public class Test extends JComponent {
 
 	public static BufferedImage getQrCodeImg(String context, int size,
 			BufferedImage logo) throws WriterException {
-		QrCodeHelper qh = new QrCodeHelper();
+		QRCodeHelper qh = new QRCodeHelper();
 		qh.setContext(context);
 		qh.setSize(size);
 		qh.setLogoImage(logo);
