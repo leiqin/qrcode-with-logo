@@ -121,7 +121,8 @@ public class Test extends JComponent {
 			context = args[2];
 		} else if (args.length == 4) {
 			output = args[0];
-			size = Integer.valueOf(args[1]);
+			if (args[1].trim().length() != 0)
+				size = Integer.valueOf(args[1]);
 			logopath = args[2];
 			context = args[3];
 		}
