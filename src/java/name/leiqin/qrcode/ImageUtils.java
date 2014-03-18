@@ -19,9 +19,10 @@ public class ImageUtils {
 	}
 
 	public static BufferedImage cutAndScaleToSquare(BufferedImage src, int size) {
-		int width = src.getWidth();
+		BufferedImage square = cutToSquare(src);
+		int width = square.getWidth();
 		double scale = size * 1.0 / width;
-		BufferedImage result = scale(src, scale);
+		BufferedImage result = scale(square, scale);
 		return result;
 	}
 

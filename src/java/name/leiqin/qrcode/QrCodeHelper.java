@@ -2,6 +2,7 @@ package name.leiqin.qrcode;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
+import java.awt.Composite;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.geom.RoundRectangle2D;
@@ -38,7 +39,7 @@ public class QrCodeHelper {
 
 		int logoSize = getLogoSize();
 		int logoOffset = getLogoOffset();
-		int logoRoundRadius = getLogoRoundRadius();
+		int logoRoundRadius = getLogoRoundRadius() * 2;
 
 		int logoMarginRectSize = getLogoMarginRectSize();
 		int logoMarginRectOffset = getLogoMarginRectOffset();
@@ -66,6 +67,8 @@ public class QrCodeHelper {
 
 		if (logoImage != null) {
 			// fill logo margin rect
+			Composite c = g.getComposite();
+			Object rh = g.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
 			g.setComposite(AlphaComposite.Src);
 			g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, 
 					RenderingHints.VALUE_ANTIALIAS_ON);
@@ -73,6 +76,8 @@ public class QrCodeHelper {
 			g.fill(new RoundRectangle2D.Float(logoMarginRectOffset, logoMarginRectOffset, 
 					logoMarginRectSize, logoMarginRectSize, 
 					logoMarginRectRoundRadius, logoMarginRectRoundRadius));
+			g.setComposite(c);
+			g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, rh);
 
 			// scale the logo img
 			BufferedImage scLogo = ImageUtils.cutAndScaleToRoundSquare(logoImage, 
