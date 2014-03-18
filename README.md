@@ -8,6 +8,7 @@ qrcode-with-logo
 	java -cp bin:lib/core-3.0.0.jar:lib/javase-3.0.0.jar name.leiqin.qrcode.Test [[[output] size] logopath] context
 
 参数：
+
 	output     输出文件，png 格式，省略则会使用 swing 显示
 	size       图片大小，缺省为 500
 	logopath   logo 文件的地址，可以是 url
