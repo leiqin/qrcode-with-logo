@@ -39,7 +39,7 @@ public class QRCodeHelper {
 
 		int logoSize = getLogoSize();
 		int logoOffset = getLogoOffset();
-		int logoRoundRadius = getLogoRoundRadius() * 2;
+		int logoRoundRadius = getLogoRoundRadius();
 
 		int logoMarginRectSize = getLogoMarginRectSize();
 		int logoMarginRectOffset = getLogoMarginRectOffset();
@@ -114,7 +114,7 @@ public class QRCodeHelper {
 		int logoSize = getLogoSize();
 		int marginSize = (int)Math.round(logoSize * logoMarginOverLogo);
 		int logoRoundRadius = getLogoRoundRadius();
-		return logoRoundRadius + marginSize;
+		return logoRoundRadius + marginSize * 2;
 	}
 
 	public int getLogoSize() {
@@ -126,7 +126,7 @@ public class QRCodeHelper {
 	}
 
 	public int getLogoRoundRadius() {
-		return (int)Math.round(getLogoSize() * logoRoundRadiusOverLogo);
+		return (int)Math.round(getLogoSize() * logoRoundRadiusOverLogo) * 2;
 	}
 
 	/**
