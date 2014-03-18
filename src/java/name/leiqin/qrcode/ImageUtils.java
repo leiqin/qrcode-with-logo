@@ -12,9 +12,9 @@ import java.awt.image.BufferedImage;
 
 public class ImageUtils {
 
-	public static BufferedImage cutAndScaleToRoundSquare(BufferedImage src, int size) {
+	public static BufferedImage cutAndScaleToRoundSquare(BufferedImage src, int size, int radius) {
 		BufferedImage bi = cutAndScaleToSquare(src, size);
-		BufferedImage result = makeRoundedCorner(bi, Math.round(size * 0.1f));
+		BufferedImage result = makeRoundedCorner(bi, radius);
 		return result;
 	}
 
