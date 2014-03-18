@@ -13,14 +13,32 @@ import java.awt.image.BufferedImage;
 public class ImageUtils {
 
 	public static BufferedImage cutAndScaleToRoundSquare(BufferedImage src, int size) {
-		BufferedImage bi = cutAndScaleToRoundSquare(src, size);
+		BufferedImage bi = cutAndScaleToSquare(src, size);
 		BufferedImage result = makeRoundedCorner(bi, Math.round(size * 0.1f));
 		return result;
 	}
 
 	public static BufferedImage cutAndScaleToSquare(BufferedImage src, int size) {
-		// TODO
-		return null;
+		int width = src.getWidth();
+		double scale = size * 1.0 / width;
+		BufferedImage result = scale(src, scale);
+		return result;
+	}
+
+	public static BufferedImage cutToSquare(BufferedImage src) {
+		int width = src.getWidth();
+		int height = src.getHeight();
+		if (width == height)
+			return src;
+		BufferedImage result = null;
+		if (width > height) {
+			int cut = (width - height) / 2;
+			result = src.getSubimage(cut, 0, height, height);
+		} else {
+			int cut = (height - width) / 2;
+			result = src.getSubimage(0, cut, width, width);
+		}
+		return result;
 	}
 
 	/**
