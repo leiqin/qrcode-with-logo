@@ -3,6 +3,14 @@ qrcode-with-logo
 
 生成带 Logo 的二维码图片
 
+下载依赖：
+
+	ant retrieve
+
+编译：
+
+	ant
+
 使用方法：
 
 	java -cp bin:lib/core-3.0.0.jar:lib/javase-3.0.0.jar name.leiqin.qrcode.Test [[[output] size] logopath] context
