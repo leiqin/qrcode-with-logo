@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project xmlns:ivy="antlib:org.apache.ivy.ant" 
+    name="qrcode-with-logo" basedir="." default="build">
+	<property environment="env" />
+	<available property="conf" file="src-conf" type="dir" value="src-conf" />
+	<property name="src" location="src/java" />
+	<property name="dest" location="dest" />
+	<property name="build" location="bin" />
+	<property name="lib" location="lib" />
+	<property name="lib.sources" location="sources" />
+	<property name="lib.javadoc" location="javadoc" />
+	<property name="jar" location="${dest}/${ant.project.name}.jar" />
+	<property name="debug" value="true" />
+	<property name="nowarn" value="true" />
+	<property name="verbose" value="false" />
+	<property name="fork" value="true" />
+	<property name="mmax" value="512m" />
+	<property name="encoding" value="utf-8" />
+	<property name="access" value="protected"/>
+	<path id="classpath">
+		<path location="${build}" />
+		<fileset dir="${lib}">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+	<patternset id="conf.file">
+		<exclude name="**/*.java" />
+		<exclude name="**/*.class" />
+		<exclude name="**/*.sql" />
+		<exclude name="**/*.bak" />
+		<exclude name="**/*.jj" />
+	</patternset>
+    <target name="retrieve" description="--> retrieve dependencies with ivy">
+		<ivy:retrieve symlink="true" type="jar, bundle" 
+				pattern="lib/[artifact]-[revision].[ext]"/>
+    </target>
+    <target name="retrieve-source" description="--> retrieve dependencies with ivy">
+		<ivy:retrieve symlink="true" type="source" 
+				pattern="${lib.sources}/[artifact]-[revision].[ext]"/>
+    </target>
+    <target name="report" description="生成依赖关系的报告">
+        <ivy:resolve />
+        <ivy:report todir="${dest}/ivy" />
+    </target>
+    <target name="cleanlib" description="删除jar包">
+		<delete dir="${lib}" />
+    </target>
+	<target name="copy.conf" if="conf">
+		<copy todir="${build}">
+			<fileset dir="${conf}">
+				<patternset refid="conf.file" />
+			</fileset>
+		</copy>
+	</target>
+	<target name="build" depends="copy.conf" description="编译并复制配置文件">
+		<copy todir="${build}">
+			<fileset dir="${src}">
+				<patternset refid="conf.file" />
+			</fileset>
+		</copy>
+		<javac destdir="${build}" debug="${debug}" nowarn="${nowarn}" verbose="${verbose}" fork="${fork}" encoding="${encoding}" memorymaximumsize="${mmax}" includeantruntime="false">
+			<src path="${src}">
+			</src>
+			<include name="**/*.java" />
+			<classpath refid="classpath" />
+		</javac>
+	</target>
+    <target name="test" depends="build" description="运行测试">
+        <mkdir  dir="${dest}" />
+        <junit fork="true">
+            <classpath refid="classpath" />
+            <formatter type="plain" />
+            <batchtest todir="${dest}">
+                <fileset dir="${test}"/>
+            </batchtest>
+        </junit>
+    </target>
+	<target name="jar" depends="build" description="打jar包">
+		<mkdir dir="${dest}" />
+		<jar manifest="src/conf/MANIFEST.MF" destfile="${jar}">
+			<fileset dir="${build}"/>
+			<fileset dir="${lib}">
+				<include name="*.jar" />
+			</fileset>
+		</jar>
+	</target>
+	<target name="clean" description="清理">
+		<delete file="${temp.jar}" />
+		<delete file="${jar}" />
+		<delete dir="${build}" />
+	</target>
+	<target name="run" description="运行">
+		<java classname="${classname}">
+			<classpath refid="classpath">
+			</classpath>
+		</java>
+	</target>
+</project>

@@ -1,0 +1,10 @@
+<ivy-module version="2.0">
+    <info organisation="name.leiqin" module="test2"/>
+	<configurations defaultconfmapping="lib->default;sources">
+        <conf name="lib" />
+        <conf name="sources" />
+    </configurations>
+    <dependencies>
+		<dependency org="com.google.zxing" name="javase" rev="3.0.0" />
+    </dependencies>
+</ivy-module>
