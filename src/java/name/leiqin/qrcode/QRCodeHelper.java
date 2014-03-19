@@ -24,16 +24,20 @@ public class QRCodeHelper {
 	public static double DEFAULT_LOGO_OVER_WHOLE = 1.0 / 5;
 	public static double DEFAULT_LOGO_MARGIN_OVER_LOGO = 1.0 / 16;
 	public static double DEFAULT_LOGO_ROUND_RADIUS_OVER_LOGO = 1.0 / 10;
+	public static int DEFAULT_SIZE = 500;
 
 	String context;
 	BufferedImage logoImage;
-	int size;
+	int size = DEFAULT_SIZE;
 	double qrCodeOverWhole = DEFAULT_QRCODE_OVER_WHOLE;
 	double logoOverWhole = DEFAULT_LOGO_OVER_WHOLE;
 	double logoMarginOverLogo = DEFAULT_LOGO_MARGIN_OVER_LOGO;
 	double logoRoundRadiusOverLogo = DEFAULT_LOGO_ROUND_RADIUS_OVER_LOGO;
 
 	public BufferedImage qrcodeImg() throws WriterException {
+		if (context == null)
+			return null;
+
 		int qrCodeSize = getQrCodeSize();
 		int qrCodeOffset = getQrCodeOffset();
 
