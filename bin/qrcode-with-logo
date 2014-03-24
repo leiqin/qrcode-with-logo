@@ -45,5 +45,10 @@ fi
 realfile=`readlink -f $0`
 workdir=`dirname $realfile`
 
-cd "$workdir"
-mvn exec:java -Dexec.args="$output $size $logopath $context"
+classpath="$workdir/bin"
+for jar in `ls "$workdir/lib"`
+do
+	classpath="$classpath:$workdir/lib/$jar"
+done
+
+java -cp "$classpath" name.leiqin.qrcode.Test "$output" "$size" "$logopath" "$context"

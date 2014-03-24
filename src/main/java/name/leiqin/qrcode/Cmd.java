@@ -16,7 +16,7 @@ import javax.swing.JFrame;
 
 import com.google.zxing.WriterException;
 
-public class Test extends JComponent {
+public class Cmd extends JComponent {
 
 	private BufferedImage bi = null;
 	private int width = 0;
@@ -48,7 +48,7 @@ public class Test extends JComponent {
 	}
 
 	public static void showWithSwing(BufferedImage img) {
-		Test t = new Test();
+		Cmd t = new Cmd();
 		t.width = img.getWidth();
 		t.height = img.getHeight();
 		t.bi = img;
@@ -84,8 +84,7 @@ public class Test extends JComponent {
 
 	public static void printUsage() {
 		System.out.println("Usage:");
-		System.out.println("    java -cp bin:lib/core-3.0.0.jar:lib/javase-3.0.0.jar name.leiqin.qrcode.Test \\");
-		System.out.println("        [[[output] size] logopath] context");
+		System.out.println("    mvn exec:java -Dexec.args='[[[output] size] logopath] context'");
 		System.out.println();
 		System.out.println("Args:");
 		System.out.println("    output     输出文件，png 格式，省略则会使用 swing 显示");

@@ -3,9 +3,17 @@ qrcode-with-logo
 
 生成带 Logo 的二维码图片
 
+下载依赖：
+
+	ant retrieve
+
+编译：
+
+	ant
+
 使用方法：
 
-	mvn exec:java -Dexec.args='[[[output] size] logopath] context'
+	java -cp bin:lib/core-3.0.0.jar:lib/javase-3.0.0.jar name.leiqin.qrcode.Test [[[output] size] logopath] context
 
 参数：
 
@@ -28,6 +36,6 @@ qrcode-with-logo
 
 下图使用这个命令生成的：
 	
-	mvn exec:java -Dexec.args='qrcode.png http://blog.leiqin.name/static/images/galaxy-ngc3370.jpg  https://github.com/leiqin/qrcode-with-logo'
+	java -cp bin:lib/core-3.0.0.jar:lib/javase-3.0.0.jar name.leiqin.qrcode.Test qrcode.png http://blog.leiqin.name/static/images/galaxy-ngc3370.jpg  https://github.com/leiqin/qrcode-with-logo
 
 <img src="http://blog.leiqin.name/qrcode-with-logo/images/qrcode.png"/>
