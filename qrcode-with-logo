@@ -2,7 +2,7 @@
 
 function usage(){
 	printf "使用方法：\n"
-	printf "        `basename $0` [-o output] [-s size] [-l logopath] context\n"
+	printf "        `basename $0` [-o output] [-s size] [-l logopath] content\n"
 	printf "\n"
 	printf "说明：\n"
 	printf "         -o output    输出文件，png 格式，省略则会使用 swing 显示\n"
@@ -36,8 +36,8 @@ done
 
 shift $((OPTIND -1))
 
-context=$1
-if [ -z "$context" ]; then
+content=$1
+if [ -z "$content" ]; then
 	usage
 	exit 1
 fi
@@ -46,4 +46,4 @@ realfile=`readlink -f $0`
 workdir=`dirname $realfile`
 
 cd "$workdir"
-mvn exec:java -Dexec.args="$output $size $logopath $context"
+mvn exec:java -Dexec.args="$output $size $logopath $content"

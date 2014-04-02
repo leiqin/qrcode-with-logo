@@ -26,7 +26,7 @@ public class QRCodeHelper {
 	public static double DEFAULT_LOGO_ROUND_RADIUS_OVER_LOGO = 1.0 / 10;
 	public static int DEFAULT_SIZE = 500;
 
-	String context;
+	String content;
 	BufferedImage logoImage;
 	int size = DEFAULT_SIZE;
 	double qrCodeOverWhole = DEFAULT_QRCODE_OVER_WHOLE;
@@ -35,7 +35,7 @@ public class QRCodeHelper {
 	double logoRoundRadiusOverLogo = DEFAULT_LOGO_ROUND_RADIUS_OVER_LOGO;
 
 	public BufferedImage qrcodeImg() throws WriterException {
-		if (context == null)
+		if (content == null)
 			return null;
 
 		int qrCodeSize = getQrCodeSize();
@@ -55,7 +55,7 @@ public class QRCodeHelper {
 		hints.put(EncodeHintType.MARGIN, 0);
 
 		MultiFormatWriter mfw = new MultiFormatWriter();
-		BitMatrix bm = mfw.encode(context, BarcodeFormat.QR_CODE, qrCodeSize, qrCodeSize, hints);
+		BitMatrix bm = mfw.encode(content, BarcodeFormat.QR_CODE, qrCodeSize, qrCodeSize, hints);
 		
 		BufferedImage qrImg = MatrixToImageWriter.toBufferedImage(bm);
 
@@ -136,15 +136,15 @@ public class QRCodeHelper {
 	/**
 	 * @return the context
 	 */
-	public String getContext() {
-		return context;
+	public String getContent() {
+		return content;
 	}
 
 	/**
 	 * @param context the context to set
 	 */
-	public void setContext(String context) {
-		this.context = context;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	/**

@@ -33,10 +33,10 @@ public class Cmd extends JComponent {
 		g.drawImage(bi, 0, 0, this);
 	}
 
-	public static BufferedImage getQrCodeImg(String context, int size,
+	public static BufferedImage getQrCodeImg(String content, int size,
 			BufferedImage logo) throws WriterException {
 		QRCodeHelper qh = new QRCodeHelper();
-		qh.setContext(context);
+		qh.setContent(content);
 		qh.setSize(size);
 		qh.setLogoImage(logo);
 		return qh.qrcodeImg();
@@ -84,13 +84,13 @@ public class Cmd extends JComponent {
 
 	public static void printUsage() {
 		System.out.println("Usage:");
-		System.out.println("    mvn exec:java -Dexec.args='[[[output] size] logopath] context'");
+		System.out.println("    mvn exec:java -Dexec.args='[[[output] size] logopath] content'");
 		System.out.println();
 		System.out.println("Args:");
 		System.out.println("    output     输出文件，png 格式，省略则会使用 swing 显示");
 		System.out.println("    size       图片大小，缺省为 500");
-		System.out.println("    logopath   logo 文件的地址，可以是 url");
-		System.out.println("    context    二维码中所要包含的内容");
+		System.out.println("    logopnth   logo 文件的地址，可以是 url");
+		System.out.println("    content    二维码中所要包含的内容");
 	}
 
 	public static void main(String[] args) throws Exception {
@@ -98,36 +98,36 @@ public class Cmd extends JComponent {
 			printUsage();
 			System.exit(0);
 		}
-		String context = null;
+		String content = null;
 		int size = 500;
 		String logopath = null;
 		String output = null;
 
 		if (args.length == 1) {
-			context = args[0];
+			content = args[0];
 		} else if (args.length == 2) {
 			if (Pattern.matches("\\d+", args[0]))
 				size = Integer.valueOf(args[0]);
 			else
 				logopath = args[0];
-			context = args[1];
+			content = args[1];
 		} else if (args.length == 3) {
 			if (Pattern.matches("\\d+", args[0]))
 				size = Integer.valueOf(args[0]);
 			else
 				output = args[0];
 			logopath = args[1];
-			context = args[2];
+			content = args[2];
 		} else if (args.length == 4) {
 			output = args[0];
 			if (args[1].trim().length() != 0)
 				size = Integer.valueOf(args[1]);
 			logopath = args[2];
-			context = args[3];
+			content = args[3];
 		}
 
 		BufferedImage logoImg = getImageFromPath(logopath);
-		BufferedImage result = getQrCodeImg(context, size, logoImg);
+		BufferedImage result = getQrCodeImg(content, size, logoImg);
 
 		if (output == null || output.trim().length() == 0)
 			showWithSwing(result);
