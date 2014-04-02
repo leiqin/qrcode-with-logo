@@ -16,7 +16,7 @@ qrcode-with-logo
 参数：
 
 	output     输出文件，png 格式，省略则会使用 swing 显示
-	size       图片大小，缺省为 500
+	size       图片大小，缺省为 460
 	logopath   logo 文件的地址，可以是 url
 	content    二维码中所要包含的内容
 
