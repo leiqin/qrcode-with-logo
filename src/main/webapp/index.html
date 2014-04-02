@@ -17,7 +17,7 @@ h2 {
 <body>
 <div ng-app class="container">
 	<h2>二维码生成工具</h2>
-	<form action="/qrcode.png" method="get">
+	<form action="qrcode.png" method="get">
 		<div class="form-group">
 			<label>内容</label>
 			<textarea ng-model="content" name="content" placeholder="二维码保存的内容" class="col-sm-10 form-control" required></textarea>
@@ -32,7 +32,7 @@ h2 {
 		</div>
 	</form>
 	<div>
-		<img ng-src="/qrcode.png?content={{content}}&size={{size}}&logo={{logo}}"/>
+		<img ng-src="qrcode.png?content={{content}}&size={{size}}&logo={{logo}}"/>
 	</div>
 </div>
 </body>
