@@ -74,6 +74,7 @@ public class Cmd extends JComponent {
 
 	public static BufferedImage getImageFromHttp(String url)
 			throws IOException {
+		System.setProperty("jsse.enableSNIExtension", "false");
 		URL u = new URL(url);
 		URLConnection c = u.openConnection();
 		c.connect();
