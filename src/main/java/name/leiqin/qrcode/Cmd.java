@@ -89,7 +89,7 @@ public class Cmd extends JComponent {
 		System.out.println();
 		System.out.println("Args:");
 		System.out.println("    output     输出文件，png 格式，省略则会使用 swing 显示");
-		System.out.println("    size       图片大小，缺省为 500");
+		System.out.println("    size       图片大小，缺省为 460");
 		System.out.println("    logopnth   logo 文件的地址，可以是 url");
 		System.out.println("    content    二维码中所要包含的内容");
 	}
@@ -100,7 +100,7 @@ public class Cmd extends JComponent {
 			System.exit(0);
 		}
 		String content = null;
-		int size = 500;
+		int size = 460;
 		String logopath = null;
 		String output = null;
 

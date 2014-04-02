@@ -19,7 +19,7 @@ public class Servlet extends HttpServlet {
 		if (content == null || content.trim().length() == 0)
 			return;
 		String sizeStr = req.getParameter("size");
-		int size = 500;
+		int size = 460;
 		if (sizeStr != null && sizeStr.trim().length() != 0) {
 			size = Integer.valueOf(sizeStr.trim());
 		}

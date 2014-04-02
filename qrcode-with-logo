@@ -6,7 +6,7 @@ function usage(){
 	printf "\n"
 	printf "说明：\n"
 	printf "         -o output    输出文件，png 格式，省略则会使用 swing 显示\n"
-	printf "         -s size      图片大小，缺省为 500\n"
+	printf "         -s size      图片大小，缺省为 460\n"
 	printf "         -l logopath  logo 文件的地址，可以是 url\n"
 	printf "         content      二维码中所要包含的内容\n"
 }

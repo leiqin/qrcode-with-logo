@@ -24,7 +24,7 @@ public class QRCodeHelper {
 	public static double DEFAULT_LOGO_OVER_WHOLE = 1.0 / 5;
 	public static double DEFAULT_LOGO_MARGIN_OVER_LOGO = 1.0 / 16;
 	public static double DEFAULT_LOGO_ROUND_RADIUS_OVER_LOGO = 1.0 / 10;
-	public static int DEFAULT_SIZE = 500;
+	public static int DEFAULT_SIZE = 460;
 
 	String content;
 	BufferedImage logoImage;
