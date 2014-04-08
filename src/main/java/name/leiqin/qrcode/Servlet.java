@@ -1,6 +1,7 @@
 package name.leiqin.qrcode;
 
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -15,6 +16,12 @@ public class Servlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
+		String etag = req.getHeader("If-None-Match");
+		if (etag != null && etag.equals("immutable")) {
+			resp.setStatus(304);
+			return;
+		}
+
 		String content = req.getParameter("content");
 		if (content == null || content.trim().length() == 0)
 			return;
@@ -31,8 +38,15 @@ public class Servlet extends HttpServlet {
 		}
 		try {
 			BufferedImage result = Cmd.getQrCodeImg(content, size, logo);
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			ImageIO.write(result, "png", baos);
+			byte[] bs = baos.toByteArray();
+
+			resp.setHeader("Cache-Control", "max-age=3");
+			resp.setHeader("ETag", "immutable");
 			resp.setContentType("image/png");
-			ImageIO.write(result, "png", resp.getOutputStream());
+			resp.setContentLength(bs.length);
+			resp.getOutputStream().write(bs);
 		} catch (WriterException e) {
 			throw new IOException(e);
 		}
