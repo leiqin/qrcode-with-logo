@@ -42,7 +42,7 @@ public class Servlet extends HttpServlet {
 			ImageIO.write(result, "png", baos);
 			byte[] bs = baos.toByteArray();
 
-			resp.setHeader("Cache-Control", "max-age=3");
+			resp.setHeader("Cache-Control", "max-age=2592000");
 			resp.setHeader("ETag", "immutable");
 			resp.setContentType("image/png");
 			resp.setContentLength(bs.length);
