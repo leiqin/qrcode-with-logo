@@ -34,6 +34,6 @@ qrcode-with-logo
 
 下图使用这个命令生成的：
 	
-	mvn exec:java -Dexec.args='qrcode.png https://avatars1.githubusercontent.com/u/1247384 https://github.com/leiqin/qrcode-with-logo'
+	mvn exec:java -Dexec.args='qrcode.png http://www.gravatar.com/avatar/16081f46874b3b331d7634d73c9fcac5.png?s=512 https://github.com/leiqin/qrcode-with-logo'
 
 <img src="http://blog.leiqin.name/qrcode-with-logo/images/qrcode.png"/>
