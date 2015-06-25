@@ -5,7 +5,7 @@
   <groupId>name.leiqin</groupId>
   <artifactId>qrcode-with-logo</artifactId>
   <version>1.0</version>
-  <packaging>war</packaging>
+  <packaging>jar</packaging>
 
   <name>qrcode-with-logo</name>
   <url>http://maven.apache.org</url>
@@ -13,6 +13,12 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
+	<distributionManagement>
+		<repository>
+			<id>ssh-leiqin-aws</id>
+			<url>scpexe://ssh.leiqin.info/srv/maven</url>
+		</repository>
+	</distributionManagement>
 
   <dependencies>
 	  <dependency>
@@ -34,6 +40,14 @@
   </dependencies>
 
   <build>
+	<extensions>
+		<!-- Enabling the use of SSH -->
+		<extension>
+			<groupId>org.apache.maven.wagon</groupId>
+			<artifactId>wagon-ssh-external</artifactId>
+			<version>2.7</version>
+		</extension>
+	</extensions>
 	<plugins>
       <plugin>
 		<groupId>org.codehaus.mojo</groupId>
