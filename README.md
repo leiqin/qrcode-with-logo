@@ -32,6 +32,19 @@ qrcode-with-logo
 
 	ImageIO.write(img, "png", new File(output));
 
+可以使用 https://jitpack.io/ 解决对此项目的依赖关系
+
+	<repository>
+	    <id>jitpack.io</id>
+	    <url>https://jitpack.io</url>
+	</repository>
+
+	<dependency>
+	    <groupId>com.github.leiqin</groupId>
+	    <artifactId>jdbcutils</artifactId>
+	    <version>1.0</version>
+	</dependency>
+
 下图使用这个命令生成的：
 	
 	mvn exec:java -Dexec.args='qrcode.png http://www.gravatar.com/avatar/16081f46874b3b331d7634d73c9fcac5.png?s=460 https://github.com/leiqin/qrcode-with-logo'
