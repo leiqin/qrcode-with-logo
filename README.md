@@ -41,7 +41,7 @@ qrcode-with-logo
 
 	<dependency>
 	    <groupId>com.github.leiqin</groupId>
-	    <artifactId>jdbcutils</artifactId>
+	    <artifactId>qrcode-with-logo</artifactId>
 	    <version>1.0</version>
 	</dependency>
 
