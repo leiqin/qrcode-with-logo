@@ -71,6 +71,24 @@
         <artifactId>jetty-maven-plugin</artifactId>
         <version>9.1.3.v20140225</version>
       </plugin>
+	  <!-- 
+		http://stackoverflow.com/questions/574594/how-can-i-create-an-executable-jar-with-dependencies-using-maven 
+	    mvn clean compile assembly:single 
+	  -->
+	  <plugin>
+		  <groupId>org.apache.maven.plugins</groupId>
+		  <artifactId>maven-assembly-plugin</artifactId>
+		  <configuration>
+			  <archive>
+				  <manifest>
+					  <mainClass>name.leiqin.qrcode.Cmd</mainClass>
+				  </manifest>
+			  </archive>
+			  <descriptorRefs>
+				  <descriptorRef>jar-with-dependencies</descriptorRef>
+			  </descriptorRefs>
+		  </configuration>
+	  </plugin>
     </plugins>
   </build>
 </project>
