@@ -16,7 +16,7 @@ h2 {
 </head>
 <body>
 <a href="https://github.com/leiqin/qrcode-with-logo"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
-<div ng-app class="container">
+<div ng-app="myApp" ng-controller="myCtrl" class="container">
 	<h2>二维码生成工具</h2>
 	<form action="qrcode.png" method="get">
 		<div class="form-group">
@@ -24,8 +24,13 @@ h2 {
 			<textarea ng-model="content" name="content" placeholder="二维码保存的内容" class="col-sm-10 form-control" required></textarea>
 		</div>
 		<div class="form-group">
-			<label>Logo</label>
+			<label>Logo URL</label>
 			<input type="text" ng-model="logo" name="logo" placeholder="Logo 图片的 URL 地址" class="form-control"/>
+		</div>
+		<div class="form-group">
+			<label>Logo File（本地文件）</label>
+			<i>{{ upload_msg }}</i>
+			<input type="file" ng-model="logofile" name="logofile" onchange="angular.element(this).scope().uploadfile(this.files)" class="form-control"/>
 		</div>
 		<div class="form-group">
 			<label>大小</label>
@@ -36,5 +41,43 @@ h2 {
 		<img ng-show="content" ng-src="qrcode.png?content={{content}}&size={{size}}&logo={{logo}}"/>
 	</div>
 </div>
+<script>
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope, $http) {
+	console.log('hello');
+	$scope.uploadfile = function(files) {
+		console.log(files);
+		file = files[0];
+		if (!file.type.match(/image\/.*/)) {
+			$scope.upload_msg = '只能上传图片';
+			$scope.$apply();
+			return;
+		}
+		if (file.size > 1024*1024) {
+			$scope.upload_msg = '只能上传 1M 以内的图片';
+			$scope.$apply();
+			return;
+		}
+		$scope.upload_msg = '正在上传';
+		//var formData = new FormData();
+		//formData.append("logofile", file);
+		//$http.post('upload', formData,{
+		$http.post('upload', file,{
+			headers: {'Content-Type': file.type},
+			transformRequest: angular.identity
+		}).then(function(response) {
+			console.log(response);
+			$scope.upload_msg = '上传图片成功';
+			$scope.logo = response.data;
+			$scope.$apply();
+		}, function(response) {
+			console.log(response);
+			$scope.upload_msg = '上传图片失败';
+			$scope.$apply();
+		});
+		$scope.$apply();
+	}
+});
+</script>
 </body>
 </html>

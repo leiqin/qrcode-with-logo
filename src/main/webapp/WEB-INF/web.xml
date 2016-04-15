@@ -12,4 +12,8 @@
 		<servlet-name>QRCode</servlet-name>
 		<url-pattern>/qrcode.png</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>QRCode</servlet-name>
+		<url-pattern>/upload</url-pattern>
+	</servlet-mapping>
 </web-app>

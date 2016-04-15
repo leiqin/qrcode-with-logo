@@ -3,11 +3,15 @@ package name.leiqin.qrcode;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.zxing.WriterException;
 
@@ -33,7 +37,9 @@ public class Servlet extends HttpServlet {
 		String logourl = req.getParameter("logo");
 
 		BufferedImage logo = null;
-		if (logourl != null && logourl.trim().length() != 0) {
+		if (logourl.startsWith("uploadfile://")) {
+			logo = (BufferedImage) req.getSession().getAttribute("uploadfile");
+		} else if (logourl != null && logourl.trim().length() != 0) {
 			logo = Cmd.getImageFromHttp(logourl);
 		}
 		try {
@@ -52,4 +58,17 @@ public class Servlet extends HttpServlet {
 		}
 	}
 
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+			throws IOException {
+		BufferedImage img = ImageIO.read(req.getInputStream());
+		HttpSession session = req.getSession();
+		DateFormat df = new SimpleDateFormat("YYYY-MM-DD'T'HH-mm-ss.SSSZZZ");
+		String key = "uploadfile://" + df.format(new Date());
+		session.setAttribute("uploadfile", img);
+		byte[] bs = key.getBytes("utf-8");
+		resp.setContentType("text/plain;charset=utf-8");
+		resp.setContentLength(bs.length);
+		resp.getOutputStream().write(bs);
+	}
 }
