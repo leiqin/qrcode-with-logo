@@ -45,8 +45,6 @@ qrcode-with-logo
 	    <version>1.0</version>
 	</dependency>
 
-演示地址：http://aws.leiqin.info/qrcode-with-logo/
-
 下图使用这个命令生成的：
 	
 	mvn exec:java -Dexec.args='qrcode.png http://www.gravatar.com/avatar/16081f46874b3b331d7634d73c9fcac5.png?s=460 https://github.com/leiqin/qrcode-with-logo'
